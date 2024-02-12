@@ -36,8 +36,8 @@
 		067F66232B7A490800A3BEAA = {
 			isa = PBXGroup;
 			children = (
-				067F662E2B7A490800A3BEAA /* JKOShop */,
 				067F663D2B7A497200A3BEAA /* JKOShop */,
+				067F662E2B7A490800A3BEAA /* Main */,
 				067F662D2B7A490800A3BEAA /* Products */,
 				067F66412B7A4FFE00A3BEAA /* Frameworks */,
 			);
@@ -51,14 +51,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		067F662E2B7A490800A3BEAA /* JKOShop */ = {
+		067F662E2B7A490800A3BEAA /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				067F662F2B7A490800A3BEAA /* JKOShopApp.swift */,
 				067F66332B7A490900A3BEAA /* Assets.xcassets */,
 				067F66352B7A490900A3BEAA /* Preview Content */,
 			);
-			path = JKOShop;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		067F66352B7A490900A3BEAA /* Preview Content */ = {
