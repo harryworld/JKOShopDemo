@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		067F66302B7A490800A3BEAA /* JKOShopApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F662F2B7A490800A3BEAA /* JKOShopApp.swift */; };
-		067F66322B7A490800A3BEAA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067F66312B7A490800A3BEAA /* ContentView.swift */; };
 		067F66342B7A490900A3BEAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067F66332B7A490900A3BEAA /* Assets.xcassets */; };
 		067F66372B7A490900A3BEAA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067F66362B7A490900A3BEAA /* Preview Assets.xcassets */; };
+		067F66432B7A4FFE00A3BEAA /* App in Frameworks */ = {isa = PBXBuildFile; productRef = 067F66422B7A4FFE00A3BEAA /* App */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		067F662C2B7A490800A3BEAA /* JKOShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKOShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067F662F2B7A490800A3BEAA /* JKOShopApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JKOShopApp.swift; sourceTree = "<group>"; };
-		067F66312B7A490800A3BEAA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		067F66332B7A490900A3BEAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		067F66362B7A490900A3BEAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		067F663D2B7A497200A3BEAA /* JKOShop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JKOShop; path = ..; sourceTree = "<group>"; };
@@ -27,6 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				067F66432B7A4FFE00A3BEAA /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +39,7 @@
 				067F662E2B7A490800A3BEAA /* JKOShop */,
 				067F663D2B7A497200A3BEAA /* JKOShop */,
 				067F662D2B7A490800A3BEAA /* Products */,
+				067F66412B7A4FFE00A3BEAA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				067F662F2B7A490800A3BEAA /* JKOShopApp.swift */,
-				067F66312B7A490800A3BEAA /* ContentView.swift */,
 				067F66332B7A490900A3BEAA /* Assets.xcassets */,
 				067F66352B7A490900A3BEAA /* Preview Content */,
 			);
@@ -67,6 +67,13 @@
 				067F66362B7A490900A3BEAA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		067F66412B7A4FFE00A3BEAA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +92,9 @@
 			dependencies = (
 			);
 			name = JKOShop;
+			packageProductDependencies = (
+				067F66422B7A4FFE00A3BEAA /* App */,
+			);
 			productName = JKOShop;
 			productReference = 067F662C2B7A490800A3BEAA /* JKOShop.app */;
 			productType = "com.apple.product-type.application";
@@ -139,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				067F66322B7A490800A3BEAA /* ContentView.swift in Sources */,
 				067F66302B7A490800A3BEAA /* JKOShopApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,6 +355,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		067F66422B7A4FFE00A3BEAA /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 067F66242B7A490800A3BEAA /* Project object */;
 }

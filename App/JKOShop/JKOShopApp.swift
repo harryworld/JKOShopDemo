@@ -5,6 +5,7 @@
 //  Created by Harry Ng on 12/2/2024.
 //
 
+import App
 import SwiftUI
 
 @main
