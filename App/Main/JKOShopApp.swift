@@ -22,7 +22,13 @@ struct JKOShopApp: App {
 }
 
 #Preview {
-    ContentView()
-        .environment(RouterService())
+    ContentView(selection: .order)
+        .environment(
+            RouterService(
+                orderRoutes: [.orderDetail(
+                    .mock
+                )]
+            )
+        )
         .environment(CartModel())
 }

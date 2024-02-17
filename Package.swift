@@ -22,6 +22,7 @@ let package = Package(
             name: "App",
             dependencies: [
                 "CartFeature",
+                "OrderFeature",
                 "ProductFeature",
             ]
         ),
