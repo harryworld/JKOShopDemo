@@ -16,3 +16,7 @@ struct JKOShopApp: App {
         }
     }
 }
+
+#Preview {
+    ContentView()
+}

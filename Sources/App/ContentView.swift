@@ -5,7 +5,7 @@
 //  Created by Harry Ng on 12/2/2024.
 //
 
-import Models
+import ProductFeature
 import SwiftUI
 
 public struct ContentView: View {
@@ -21,13 +21,7 @@ public struct ContentView: View {
     // ============
     
     public var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        ProductListScreen()
     }
 }
 
