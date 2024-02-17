@@ -59,4 +59,5 @@ public struct ProductListScreen: View {
 #Preview {
     ProductListScreen()
         .environment(RouterService())
+        .environment(CartModel())
 }

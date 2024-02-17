@@ -12,6 +12,7 @@ let package = Package(
         .library(name: "CartFeature", targets: ["CartFeature"]),
         .library(name: "ItemRowFeature", targets: ["ItemRowFeature"]),
         .library(name: "Models", targets: ["Models"]),
+        .library(name: "OrderFeature", targets: ["OrderFeature"]),
         .library(name: "ProductFeature", targets: ["ProductFeature"]),
         .library(name: "SharedServices", targets: ["SharedServices"]),
         .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
@@ -41,6 +42,15 @@ let package = Package(
         ),
         .target(
             name: "Models"
+        ),
+        .target(
+            name: "OrderFeature",
+            dependencies: [
+                "ItemRowFeature",
+                "Models",
+                "SharedServices",
+                "SwiftUIHelpers",
+            ]
         ),
         .target(
             name: "ProductFeature",

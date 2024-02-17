@@ -62,6 +62,8 @@ public extension Item {
     }
     
     static let mock = Item(for: "propel")!
+    static let propel = Item(for: "propel")!
+    static let tcr = Item(for: "tcr")!
 }
 
 @resultBuilder
