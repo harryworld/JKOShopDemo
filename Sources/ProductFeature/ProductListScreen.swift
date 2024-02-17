@@ -5,6 +5,7 @@
 //  Created by Harry Ng on 17/2/2024.
 //
 
+import CartFeature
 import Foundation
 import Models
 import SharedServices
@@ -16,7 +17,7 @@ public struct ProductListScreen: View {
     // MARK: - Properties
     // ==================
     
-    
+    @Environment(RouterService.self) private var router
     
     // ============
     // MARK: - Init
@@ -29,7 +30,9 @@ public struct ProductListScreen: View {
     // ============
     
     public var body: some View {
-        NavigationStack {
+        @Bindable var router = router
+        
+        NavigationStack(path: $router.productRoutes) {
             List {
                 ForEach(Item.all()) { item in
                     NavigationLink(value: ProductRoute.productDetail(item)) {
@@ -42,6 +45,8 @@ public struct ProductListScreen: View {
                 switch route {
                 case .productDetail(let item):
                     ProductDetailScreen(item: item)
+                case .cart:
+                    CartScreen()
                 }
             }
         }
@@ -50,4 +55,5 @@ public struct ProductListScreen: View {
 
 #Preview {
     ProductListScreen()
+        .environment(RouterService())
 }

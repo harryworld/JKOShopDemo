@@ -6,6 +6,7 @@
 //
 
 import ProductFeature
+import SharedServices
 import SwiftUI
 
 public struct ContentView: View {
@@ -27,4 +28,5 @@ public struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(RouterService())
 }

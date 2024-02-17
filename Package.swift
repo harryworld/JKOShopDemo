@@ -9,6 +9,7 @@ let package = Package(
     ],
     products: [
         .library(name: "App", targets: ["App"]),
+        .library(name: "CartFeature", targets: ["CartFeature"]),
         .library(name: "Models", targets: ["Models"]),
         .library(name: "ProductFeature", targets: ["ProductFeature"]),
         .library(name: "SharedServices", targets: ["SharedServices"]),
@@ -22,11 +23,18 @@ let package = Package(
             ]
         ),
         .target(
+            name: "CartFeature",
+            dependencies: [
+                "SharedServices",
+            ]
+        ),
+        .target(
             name: "Models"
         ),
         .target(
             name: "ProductFeature",
             dependencies: [
+                "CartFeature",
                 "SharedServices",
                 "SwiftUIHelpers",
             ]

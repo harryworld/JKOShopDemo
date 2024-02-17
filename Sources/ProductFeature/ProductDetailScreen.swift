@@ -7,6 +7,7 @@
 
 import Foundation
 import Models
+import SharedServices
 import SwiftUI
 import SwiftUIHelpers
 
@@ -15,6 +16,8 @@ struct ProductDetailScreen: View {
     // ==================
     // MARK: - Properties
     // ==================
+    
+    @Environment(RouterService.self) private var router
     
     var item: Item
     
@@ -50,12 +53,19 @@ struct ProductDetailScreen: View {
     
     private var bottomBar: some View {
         HStack(spacing: 32) {
-            Button(action: {}) {
+            Button {
+                // TODO: Add to Cart
+            } label: {
+                // TODO: Show badge number for items in cart
                 Label("Add to Cart", systemImage: "cart")
             }
             .padding()
             
-            Button(action: {}) {
+            Button {
+                // TODO: Add to Cart
+                // TODO: Mark selection
+                router.productRoutes.append(.cart)
+            } label: {
                 Label("Buy now", systemImage: "dollarsign")
             }
             .padding()
@@ -71,4 +81,5 @@ struct ProductDetailScreen: View {
             ProductDetailScreen(item: .mock)
         }
     }
+    .environment(RouterService())
 }
