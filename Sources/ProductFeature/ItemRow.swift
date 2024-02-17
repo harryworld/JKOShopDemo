@@ -8,6 +8,7 @@
 import Foundation
 import Models
 import SwiftUI
+import SwiftUIHelpers
 import UIKit
 
 /// Row of the product list, also demonstrate the `Container Pattern`
@@ -34,7 +35,7 @@ public struct ItemRow: View {
     public var body: some View {
         HStack(alignment: .top) {
             let imageClipShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
-            getSafeImage(named: item.imageUrl)
+            Image.getSafeImage(named: item.imageUrl)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 60)
@@ -56,15 +57,6 @@ public struct ItemRow: View {
             Spacer(minLength: 0)
         }
         .font(.subheadline)
-    }
-    
-    // ===============
-    // MARK: - Helpers
-    // ===============
-    
-    func getSafeImage(named: String) -> Image {
-       let uiImage =  (UIImage(named: named) ?? UIImage(systemName: "house"))!
-       return Image(uiImage: uiImage)
     }
 }
 

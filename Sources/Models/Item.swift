@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Item: Identifiable {
+public struct Item: Hashable, Identifiable {
     public let id: String
     public var name: String
     public var description: String
@@ -60,6 +60,8 @@ public extension Item {
             createdAt: Date()
         )
     }
+    
+    static let mock = Item(for: "propel")!
 }
 
 @resultBuilder

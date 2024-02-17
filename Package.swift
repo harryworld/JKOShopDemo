@@ -11,6 +11,8 @@ let package = Package(
         .library(name: "App", targets: ["App"]),
         .library(name: "Models", targets: ["Models"]),
         .library(name: "ProductFeature", targets: ["ProductFeature"]),
+        .library(name: "SharedServices", targets: ["SharedServices"]),
+        .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
     ],
     targets: [
         .target(
@@ -25,8 +27,18 @@ let package = Package(
         .target(
             name: "ProductFeature",
             dependencies: [
+                "SharedServices",
+                "SwiftUIHelpers",
+            ]
+        ),
+        .target(
+            name: "SharedServices",
+            dependencies: [
                 "Models",
             ]
+        ),
+        .target(
+            name: "SwiftUIHelpers"
         )
     ]
 )

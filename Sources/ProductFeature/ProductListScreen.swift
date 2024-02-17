@@ -7,6 +7,7 @@
 
 import Foundation
 import Models
+import SharedServices
 import SwiftUI
 
 public struct ProductListScreen: View {
@@ -28,9 +29,20 @@ public struct ProductListScreen: View {
     // ============
     
     public var body: some View {
-        List {
-            ForEach(Item.all()) { item in
-                ItemRow(item: item)
+        NavigationStack {
+            List {
+                ForEach(Item.all()) { item in
+                    NavigationLink(value: ProductRoute.productDetail(item)) {
+                        ItemRow(item: item)
+                    }
+                }
+            }
+            .navigationTitle("Products")
+            .navigationDestination(for: ProductRoute.self) { route in
+                switch route {
+                case .productDetail(let item):
+                    ProductDetailScreen(item: item)
+                }
             }
         }
     }
