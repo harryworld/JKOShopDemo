@@ -5,6 +5,7 @@
 //  Created by Harry Ng on 12/2/2024.
 //
 
+import CartFeature
 import ProductFeature
 import SharedServices
 import SwiftUI
@@ -29,4 +30,5 @@ public struct ContentView: View {
 #Preview {
     ContentView()
         .environment(RouterService())
+        .environment(CartModel())
 }

@@ -6,6 +6,7 @@
 //
 
 import App
+import CartFeature
 import SharedServices
 import SwiftUI
 
@@ -15,6 +16,7 @@ struct JKOShopApp: App {
         WindowGroup {
             ContentView()
                 .environment(RouterService())
+                .environment(CartModel())
         }
     }
 }
@@ -22,4 +24,5 @@ struct JKOShopApp: App {
 #Preview {
     ContentView()
         .environment(RouterService())
+        .environment(CartModel())
 }

@@ -18,11 +18,10 @@ public struct CartScreen: View {
     // MARK: - Properties
     // ==================
     
+    @Environment(CartModel.self) private var cartModel
     @Environment(RouterService.self) private var router
     
     @State private var isCheckedAll = false
-    
-    @State private var model = CartModel()
     
     // ============
     // MARK: - Init
@@ -36,7 +35,7 @@ public struct CartScreen: View {
     
     public var body: some View {
         List {
-            ForEach(model.items) { item in
+            ForEach(cartModel.items) { item in
                 @Bindable var item = item
                 HStack(spacing: 8) {
                     Toggle(isOn: $item.isChecked) {}
@@ -60,9 +59,9 @@ public struct CartScreen: View {
         HStack {
             Button {
                 if isCheckedAll {
-                    model.deselectAll()
+                    cartModel.deselectAll()
                 } else {
-                    model.selectAll()
+                    cartModel.selectAll()
                 }
             } label: {
                 Label("Select all", systemImage: isCheckedAll ? "checkmark.square" : "square")
@@ -72,11 +71,12 @@ public struct CartScreen: View {
             Spacer()
             
             HStack(spacing: 8) {
-                Text("Total $\(model.totalPrice, specifier: "%.2f")")
+                Text("Total $\(cartModel.totalPrice, specifier: "%.2f")")
                 
                 Button(action: { router.productRoutes.append(.cartConfirm) }) {
                     Text("Checkout")
                 }
+                .disabled(cartModel.selectedItems.isEmpty)
             }
         }
         .padding()
@@ -87,7 +87,7 @@ public struct CartScreen: View {
     // ===============
     
     private func updateSelectAllToggle() {
-        isCheckedAll = model.isCheckedAll
+        isCheckedAll = cartModel.isCheckedAll
     }
 }
 
@@ -96,4 +96,5 @@ public struct CartScreen: View {
         CartScreen()
     }
     .environment(RouterService())
+    .environment(CartModel())
 }

@@ -44,14 +44,6 @@ public final class CartModel {
     func deselectAll() {
         items.forEach { $0.isChecked = false }
     }
-    
-    func toggleSelectAll() {
-        if selectedItems.isEmpty {
-            
-        } else {
-            
-        }
-    }
 }
 
 @Observable

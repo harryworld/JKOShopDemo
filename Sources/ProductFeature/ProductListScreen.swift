@@ -49,7 +49,7 @@ public struct ProductListScreen: View {
                 case .cart:
                     CartScreen()
                 case .cartConfirm:
-                    EmptyView()
+                    CartConfirmScreen()
                 }
             }
         }
