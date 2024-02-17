@@ -20,6 +20,8 @@ public struct ProductListScreen: View {
     
     @Environment(RouterService.self) private var router
     
+    @State private var model = ProductModel()
+    
     // ============
     // MARK: - Init
     // ============
@@ -35,9 +37,24 @@ public struct ProductListScreen: View {
         
         NavigationStack(path: $router.productRoutes) {
             List {
-                ForEach(Item.all()) { item in
+                ForEach(model.items) { item in
                     NavigationLink(value: ProductRoute.productDetail(item)) {
                         ItemRow(item: item)
+                    }
+                    .onAppear {
+                        // Demonstrate Paging
+                        if item == model.items.last {
+                            model.fetchNextPage()
+                        }
+                    }
+                }
+                
+                // Show Loading
+                if model.isDataLoading {
+                    HStack {
+                        Spacer()
+                        Text("Loading")
+                        Spacer()
                     }
                 }
             }
