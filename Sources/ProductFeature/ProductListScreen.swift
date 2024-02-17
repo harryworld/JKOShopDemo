@@ -46,6 +46,7 @@ public struct ProductListScreen: View {
                 switch route {
                 case .productDetail(let item):
                     ProductDetailScreen(item: item)
+                        .toolbar(.hidden, for: .tabBar)
                 case .cart:
                     CartScreen()
                 case .cartConfirm:
