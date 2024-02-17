@@ -7,6 +7,7 @@
 
 import CartFeature
 import Foundation
+import ItemRowFeature
 import Models
 import SharedServices
 import SwiftUI
@@ -47,6 +48,8 @@ public struct ProductListScreen: View {
                     ProductDetailScreen(item: item)
                 case .cart:
                     CartScreen()
+                case .cartConfirm:
+                    EmptyView()
                 }
             }
         }

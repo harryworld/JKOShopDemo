@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 public extension Image {
     static func getSafeImage(named: String) -> Image {

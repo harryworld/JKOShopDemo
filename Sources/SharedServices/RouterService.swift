@@ -23,4 +23,5 @@ public final class RouterService {
 public enum ProductRoute: Hashable {
     case productDetail(Item)
     case cart
+    case cartConfirm
 }

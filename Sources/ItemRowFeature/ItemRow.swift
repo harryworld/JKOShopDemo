@@ -9,7 +9,6 @@ import Foundation
 import Models
 import SwiftUI
 import SwiftUIHelpers
-import UIKit
 
 /// Row of the product list, also demonstrate the `Container Pattern`
 public struct ItemRow: View {
