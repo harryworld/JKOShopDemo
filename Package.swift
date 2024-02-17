@@ -17,6 +17,9 @@ let package = Package(
         .library(name: "SharedServices", targets: ["SharedServices"]),
         .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/malcommac/SwiftDate", from: "7.0.0"),
+    ],
     targets: [
         .target(
             name: "App",
@@ -42,7 +45,10 @@ let package = Package(
             ]
         ),
         .target(
-            name: "Models"
+            name: "Models",
+            dependencies: [
+                .product(name: "SwiftDate", package: "SwiftDate")
+            ]
         ),
         .target(
             name: "OrderFeature",
