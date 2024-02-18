@@ -24,13 +24,25 @@ public final class CartModel {
     }
     var isCheckedAll: Bool { items.count == selectedItems.count }
     
+    public var itemCount: Int { items.count }
+    
     // ============
     // MARK: - Init
     // ============
     
     public init() {
         // TODO: Fetch items from Cart
-        items = Item.all().map { CartItem(isChecked: false, item: $0) }
+//        items = Item.all().map { CartItem(isChecked: false, item: $0) }
+        
+//        items = Item.all()
+//            .filter { cartItemIDs.contains($0.id) }
+//            .map { CartItem(isChecked: false, item: $0) }
+        
+        items = []
+    }
+    
+    public init(items: [Item]) {
+        self.items = items.map { CartItem(isChecked: false, item: $0) }
     }
     
     // ===============
@@ -43,6 +55,15 @@ public final class CartModel {
     
     func deselectAll() {
         items.forEach { $0.isChecked = false }
+    }
+    
+    public func addToCart(item: Item) {
+        items.append(CartItem(isChecked: true, item: item))
+    }
+    
+    public func submitOrder() {
+        // TODO: Add to order list
+        items.removeAll()
     }
 }
 

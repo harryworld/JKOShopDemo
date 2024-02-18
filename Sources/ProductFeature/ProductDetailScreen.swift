@@ -5,6 +5,7 @@
 //  Created by Harry Ng on 17/2/2024.
 //
 
+import CartFeature
 import Foundation
 import Models
 import SharedServices
@@ -18,6 +19,7 @@ struct ProductDetailScreen: View {
     // ==================
     
     @Environment(RouterService.self) private var router
+    @Environment(CartModel.self) private var cartModel
     
     var item: Item
     
@@ -45,6 +47,16 @@ struct ProductDetailScreen: View {
                 }
             }
             .navigationTitle(item.name)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(value: ProductRoute.cart) {
+                        Image(systemName: "cart")
+                    }
+                    .overlay {
+                        NotificationCountView(value: .constant(cartModel.itemCount))
+                    }
+                }
+            }
             .safeAreaInset(edge: .bottom) {
                 bottomBar
             }
@@ -54,16 +66,14 @@ struct ProductDetailScreen: View {
     private var bottomBar: some View {
         HStack(spacing: 32) {
             Button {
-                // TODO: Add to Cart
+                cartModel.addToCart(item: item)
             } label: {
-                // TODO: Show badge number for items in cart
                 Label("Add to Cart", systemImage: "cart")
             }
             .padding()
             
             Button {
-                // TODO: Add to Cart
-                // TODO: Mark selection
+                cartModel.addToCart(item: item)
                 router.productRoutes.append(.cart)
             } label: {
                 Label("Buy now", systemImage: "dollarsign")
@@ -82,4 +92,5 @@ struct ProductDetailScreen: View {
         }
     }
     .environment(RouterService())
+    .environment(CartModel(items: [.mock]))
 }

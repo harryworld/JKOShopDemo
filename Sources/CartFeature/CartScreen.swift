@@ -105,6 +105,7 @@ public struct CartScreen: View {
             }
         }
         .padding()
+        .background(.bar)
     }
     
     private var emptyView: some View {

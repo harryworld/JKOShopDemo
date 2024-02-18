@@ -55,6 +55,7 @@ public struct CartConfirmScreen: View {
                 
                 Button {
                     // TODO: Submit order
+                    cartModel.submitOrder()
                     isShowingOrderPlaced = true
                 } label: {
                     Text("Submit")
@@ -62,6 +63,7 @@ public struct CartConfirmScreen: View {
             }
         }
         .padding()
+        .background(.bar)
         .sheet(isPresented: $isShowingOrderPlaced) {
             OrderPlacedScreen()
         }
