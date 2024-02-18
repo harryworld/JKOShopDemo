@@ -16,6 +16,7 @@ public struct ContentView: View {
     // ==================
     
     @Environment(RouterService.self) private var router
+    @Environment(CartModel.self) private var cartModel
     
     // ============
     // MARK: - Init
@@ -35,7 +36,21 @@ public struct ContentView: View {
                 screen.destination
                     .tag(screen)
                     .tabItem { screen.label }
+                    .badge(badge(for: screen))
             }
+        }
+    }
+    
+    // ===============
+    // MARK: - Helpers
+    // ===============
+    
+    private func badge(for screen: AppScreen) -> Int {
+        switch screen {
+        case .cart:
+            return cartModel.itemCount
+        default:
+            return 0
         }
     }
 }
