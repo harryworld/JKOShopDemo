@@ -112,6 +112,7 @@ public struct CartScreen: View {
             Label("You don't have any item in the cart", systemImage: "tray.fill")
         } actions: {
             Button {
+                router.productRoutes = []
                 router.selection = .product
             } label: {
                 Text("Go shopping")
