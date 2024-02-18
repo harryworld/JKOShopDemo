@@ -29,6 +29,7 @@ struct OrderPlacedScreen: View {
             Button("Back to Home") {
                 dismiss()
                 router.productRoutes = []
+                router.cartRoutes = []
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

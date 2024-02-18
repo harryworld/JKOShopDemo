@@ -9,6 +9,7 @@ import Foundation
 
 public enum AppScreen: CaseIterable, Hashable, Identifiable {
     case product
+    case cart
     case order
     
     public var id: AppScreen { self }

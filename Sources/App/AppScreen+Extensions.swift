@@ -5,6 +5,7 @@
 //  Created by Harry Ng on 18/2/2024.
 //
 
+import CartFeature
 import OrderFeature
 import ProductFeature
 import SharedServices
@@ -16,8 +17,10 @@ extension AppScreen {
         switch self {
         case .product:
             Label("Products", systemImage: "house")
+        case .cart:
+            Label("Cart", systemImage: "cart")
         case .order:
-            Label("Orders", systemImage: "cart")
+            Label("Orders", systemImage: "doc.fill")
         }
     }
     
@@ -26,6 +29,8 @@ extension AppScreen {
         switch self {
         case .product:
             ProductListScreen()
+        case .cart:
+            CartWrapperScreen()
         case .order:
             OrderListScreen()
         }
