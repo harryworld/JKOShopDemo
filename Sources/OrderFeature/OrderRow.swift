@@ -56,10 +56,10 @@ public struct OrderRow: View {
             Divider()
             
             HStack {
-                Text("\(order.items.count) items")
+                Text("\(order.items.count) items", bundle: Bundle.module)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text("Total: $\(order.totalPrice, specifier: "%.0f")")
+                Text("Total: $\(order.totalPrice, specifier: "%.0f")", bundle: Bundle.module)
                     .lineLimit(1)
             }
         }

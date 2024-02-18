@@ -39,7 +39,7 @@ public struct OrderListScreen: View {
                     }
                 }
             }
-            .navigationTitle("Orders")
+            .navigationTitle(Text("Orders", bundle: Bundle.module))
             .navigationDestination(for: OrderRoute.self) { route in
                 switch route {
                 case .orderDetail(let order):

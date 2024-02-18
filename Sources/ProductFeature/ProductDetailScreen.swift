@@ -68,7 +68,11 @@ struct ProductDetailScreen: View {
             Button {
                 cartModel.addToCart(item: item)
             } label: {
-                Label("Add to Cart", systemImage: "cart")
+                Label {
+                    Text("Add to Cart", bundle: Bundle.module)
+                } icon: {
+                    Image(systemName: "cart")
+                }
             }
             .padding()
             
@@ -76,7 +80,11 @@ struct ProductDetailScreen: View {
                 cartModel.addToCart(item: item)
                 router.productRoutes.append(.cart)
             } label: {
-                Label("Buy now", systemImage: "dollarsign")
+                Label {
+                    Text("Buy now", bundle: Bundle.module)
+                } icon: {
+                    Image(systemName: "dollarsign")
+                }
             }
             .padding()
         }

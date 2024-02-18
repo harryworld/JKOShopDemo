@@ -53,12 +53,12 @@ public struct ProductListScreen: View {
                 if model.isDataLoading {
                     HStack {
                         Spacer()
-                        Text("Loading")
+                        Text("Loading", bundle: Bundle.module)
                         Spacer()
                     }
                 }
             }
-            .navigationTitle("Products")
+            .navigationTitle(Text("Products", bundle: Bundle.module))
             .navigationDestination(for: ProductRoute.self) { route in
                 switch route {
                 case .productDetail(let item):

@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "JKOShop",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v17)
     ],

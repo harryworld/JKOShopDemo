@@ -16,11 +16,23 @@ extension AppScreen {
     var label: some View {
         switch self {
         case .product:
-            Label("Products", systemImage: "house")
+            Label {
+                Text("Products", bundle: Bundle.module)
+            } icon: {
+                Image(systemName: "house")
+            }
         case .cart:
-            Label("Cart", systemImage: "cart")
+            Label {
+                Text("Cart", bundle: Bundle.module)
+            } icon: {
+                Image(systemName: "cart")
+            }
         case .order:
-            Label("Orders", systemImage: "doc.fill")
+            Label {
+                Text("Orders", bundle: Bundle.module)
+            } icon: {
+                Image(systemName: "doc.fill")
+            }
         }
     }
     

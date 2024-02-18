@@ -1,0 +1,9 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "$%.2f" : {
+
+    }
+  },
+  "version" : "1.0"
+}

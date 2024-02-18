@@ -40,7 +40,7 @@ public struct CartConfirmScreen: View {
                 .padding(.horizontal, 4)
             }
         }
-        .navigationTitle("Confirm Order")
+        .navigationTitle(Text("Confirm Order", bundle: Bundle.module))
         .safeAreaInset(edge: .bottom) {
             bottomBar
         }
@@ -51,14 +51,14 @@ public struct CartConfirmScreen: View {
             Spacer()
             
             HStack(spacing: 8) {
-                Text("Total $\(cartModel.totalPrice, specifier: "%.2f")")
+                Text("Total $\(cartModel.totalPrice, specifier: "%.2f")", bundle: Bundle.module)
                 
                 Button {
                     // TODO: Submit order
                     cartModel.submitOrder()
                     isShowingOrderPlaced = true
                 } label: {
-                    Text("Submit")
+                    Text("Submit", bundle: Bundle.module)
                 }
             }
         }

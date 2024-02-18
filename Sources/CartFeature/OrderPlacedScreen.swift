@@ -26,11 +26,13 @@ struct OrderPlacedScreen: View {
         VStack {
             card
             
-            Button("Back to Home") {
+            Button {
                 dismiss()
                 router.productRoutes = []
                 router.cartRoutes = []
                 router.selection = .product
+            } label: {
+                Text("Back to Home", bundle: Bundle.module)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -42,11 +44,11 @@ struct OrderPlacedScreen: View {
     
     private var card: some View {
         VStack {
-            Text("Thank you for your order!")
+            Text("Thank you for your order!", bundle: Bundle.module)
                 .font(.title.bold())
                 .textCase(.uppercase)
                 .layoutPriority(1)
-            Text("We will deliver your order shortly.")
+            Text("We will deliver your order shortly.", bundle: Bundle.module)
                 .font(.system(.headline, design: .rounded))
                 .foregroundStyle(.secondary)
         }

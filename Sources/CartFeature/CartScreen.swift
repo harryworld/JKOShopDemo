@@ -66,7 +66,7 @@ public struct CartScreen: View {
                         }
                     } label: {
                         Label {
-                            Text("Remove")
+                            Text("Remove", bundle: Bundle.module)
                         } icon: {
                             Image(systemName: "trash")
                         }
@@ -75,7 +75,7 @@ public struct CartScreen: View {
                 }
             }
         }
-        .navigationTitle("Cart")
+        .navigationTitle(Text("Cart", bundle: Bundle.module))
         .safeAreaInset(edge: .bottom) {
             bottomBar
         }
@@ -90,7 +90,11 @@ public struct CartScreen: View {
                     cartModel.selectAll()
                 }
             } label: {
-                Label("Select all", systemImage: isCheckedAll ? "checkmark.square" : "square")
+                Label {
+                    Text("Select all", bundle: Bundle.module)
+                } icon: {
+                    Image(systemName: isCheckedAll ? "checkmark.square" : "square")
+                }
             }
             .buttonStyle(.plain)
             .onAppear {
@@ -100,10 +104,10 @@ public struct CartScreen: View {
             Spacer()
             
             HStack(spacing: 8) {
-                Text("Total $\(cartModel.totalPrice, specifier: "%.2f")")
+                Text("Total $\(cartModel.totalPrice, specifier: "%.2f")", bundle: Bundle.module)
                 
                 NavigationLink(value: ProductRoute.cartConfirm) {
-                    Text("Checkout")
+                    Text("Checkout", bundle: Bundle.module)
                 }
                 .disabled(cartModel.selectedItems.isEmpty)
             }
@@ -114,13 +118,17 @@ public struct CartScreen: View {
     
     private var emptyView: some View {
         ContentUnavailableView {
-            Label("You don't have any item in the cart", systemImage: "tray.fill")
+            Label {
+                Text("You don't have any item in the cart", bundle: Bundle.module)
+            } icon: {
+                Image(systemName: "tray.fill")
+            }
         } actions: {
             Button {
                 router.productRoutes = []
                 router.selection = .product
             } label: {
-                Text("Go shopping")
+                Text("Go shopping", bundle: Bundle.module)
             }
         }
     }

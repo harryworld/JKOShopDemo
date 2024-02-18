@@ -32,7 +32,7 @@ public struct CartWrapperScreen: View {
         
         NavigationStack(path: $router.cartRoutes) {
             CartScreen()
-                .navigationTitle("Cart")
+                .navigationTitle(Text("Cart", bundle: Bundle.module))
                 .navigationDestination(for: ProductRoute.self) { route in
                     switch route {
                     case .cartConfirm:

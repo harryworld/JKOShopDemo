@@ -1,0 +1,46 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld items" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 商品"
+          }
+        }
+      }
+    },
+    "Order Detail" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "訂單詳情"
+          }
+        }
+      }
+    },
+    "Orders" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "歷史訂單紀錄"
+          }
+        }
+      }
+    },
+    "Total: $%.0f" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "訂單金額: $%.0f"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
