@@ -5,6 +5,7 @@
 //  Created by Harry Ng on 17/2/2024.
 //
 
+import Foundation
 import Models
 import Observation
 
@@ -15,7 +16,21 @@ public final class CartModel {
     // MARK: - Properties
     // ==================
     
-    var items: [CartItem]
+    private var cartItemIDs: [String] {
+        get {
+            guard let ids = UserDefaults.standard.object(forKey: "cartItemIDs") as? [String] else { return [] }
+            return ids
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "cartItemIDs")
+        }
+    }
+    
+    var items: [CartItem] {
+        didSet {
+            cartItemIDs = items.map(\.item.id)
+        }
+    }
     var selectedItems: [CartItem] {
         items.filter(\.isChecked)
     }
@@ -31,14 +46,13 @@ public final class CartModel {
     // ============
     
     public init() {
-        // TODO: Fetch items from Cart
-//        items = Item.all().map { CartItem(isChecked: false, item: $0) }
-        
-//        items = Item.all()
-//            .filter { cartItemIDs.contains($0.id) }
-//            .map { CartItem(isChecked: false, item: $0) }
-        
-        items = []
+        if let ids = UserDefaults.standard.object(forKey: "cartItemIDs") as? [String] {
+            items = Item.all()
+                .filter { ids.contains($0.id) }
+                .map { CartItem(isChecked: false, item: $0) }
+        } else {
+            items = []
+        }
     }
     
     public init(items: [Item]) {
