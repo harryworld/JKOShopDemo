@@ -84,7 +84,7 @@ public struct CartScreen: View {
             HStack(spacing: 8) {
                 Text("Total $\(cartModel.totalPrice, specifier: "%.2f")")
                 
-                Button(action: { router.productRoutes.append(.cartConfirm) }) {
+                NavigationLink(value: ProductRoute.cartConfirm) {
                     Text("Checkout")
                 }
                 .disabled(cartModel.selectedItems.isEmpty)
