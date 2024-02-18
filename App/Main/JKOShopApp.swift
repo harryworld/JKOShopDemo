@@ -22,9 +22,10 @@ struct JKOShopApp: App {
 }
 
 #Preview {
-    ContentView(selection: .order)
+    ContentView()
         .environment(
             RouterService(
+                selection: .order,
                 orderRoutes: [.orderDetail(
                     .mock
                 )]

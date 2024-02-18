@@ -15,22 +15,22 @@ public struct ContentView: View {
     // MARK: - Properties
     // ==================
     
-    @State var selection: AppScreen
+    @Environment(RouterService.self) private var router
     
     // ============
     // MARK: - Init
     // ============
     
-    public init(selection: AppScreen = .product) {
-        self._selection = State(wrappedValue: selection)
-    }
+    public init() { }
     
     // ============
     // MARK: - Body
     // ============
     
     public var body: some View {
-        TabView(selection: $selection) {
+        @Bindable var router = router
+        
+        TabView(selection: $router.selection) {
             ForEach(AppScreen.allCases) { screen in
                 screen.destination
                     .tag(screen)

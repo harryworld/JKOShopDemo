@@ -30,6 +30,7 @@ struct OrderPlacedScreen: View {
                 dismiss()
                 router.productRoutes = []
                 router.cartRoutes = []
+                router.selection = .product
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

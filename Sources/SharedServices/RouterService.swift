@@ -11,15 +11,19 @@ import Observation
 
 @Observable
 public final class RouterService {
+    public var selection: AppScreen = .product
+    
     public var productRoutes: [ProductRoute] = []
     public var cartRoutes: [ProductRoute] = []
     public var orderRoutes: [OrderRoute] = []
     
     public init(
+        selection: AppScreen = .product,
         productRoutes: [ProductRoute] = [],
         cartRoutes: [ProductRoute] = [],
         orderRoutes: [OrderRoute] = []
     ) {
+        self.selection = selection
         self.productRoutes = productRoutes
         self.cartRoutes = cartRoutes
         self.orderRoutes = orderRoutes
