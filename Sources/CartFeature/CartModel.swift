@@ -47,9 +47,14 @@ public final class CartModel {
     
     public init() {
         if let ids = UserDefaults.standard.object(forKey: "cartItemIDs") as? [String] {
-            items = Item.all()
-                .filter { ids.contains($0.id) }
-                .map { CartItem(isChecked: false, item: $0) }
+            let products = Item.all()
+            items = ids.compactMap { id in
+                if let product = products.first(where: { $0.id == id }) {
+                    return CartItem(isChecked: false, item: product)
+                } else {
+                    return nil
+                }
+            }
         } else {
             items = []
         }
@@ -72,7 +77,10 @@ public final class CartModel {
     }
     
     public func addToCart(item: Item) {
-        items.append(CartItem(isChecked: true, item: item))
+        if items.contains(where: { $0.item.id == item.id }) {
+            return
+        }
+        items.insert(CartItem(isChecked: true, item: item), at: 0)
     }
     
     public func submitOrder() {
