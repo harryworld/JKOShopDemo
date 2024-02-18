@@ -37,6 +37,9 @@ struct ProductDetailScreen: View {
                     
                     VStack(alignment: .leading) {
                         Text(item.name)
+                        Text("$\(item.price, specifier: "%.2f")")
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
                         Text(item.description)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
