@@ -67,6 +67,9 @@ public struct CartScreen: View {
                 Label("Select all", systemImage: isCheckedAll ? "checkmark.square" : "square")
             }
             .buttonStyle(.plain)
+            .onAppear {
+                updateSelectAllToggle()
+            }
             
             Spacer()
             
