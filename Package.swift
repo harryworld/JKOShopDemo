@@ -19,6 +19,7 @@ let package = Package(
         .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/groue/GRDB.swift", from: "6.24.2"),
         .package(url: "https://github.com/malcommac/SwiftDate", from: "7.0.0"),
     ],
     targets: [
@@ -48,6 +49,7 @@ let package = Package(
         .target(
             name: "Models",
             dependencies: [
+                .product(name: "GRDB", package: "GRDB.swift"),
                 .product(name: "SwiftDate", package: "SwiftDate")
             ]
         ),
