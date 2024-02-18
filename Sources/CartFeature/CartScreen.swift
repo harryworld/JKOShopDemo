@@ -34,6 +34,14 @@ public struct CartScreen: View {
     // ============
     
     public var body: some View {
+        if cartModel.items.isEmpty {
+            emptyView
+        } else {
+            listView
+        }
+    }
+    
+    private var listView: some View {
         List {
             ForEach(cartModel.items) { item in
                 @Bindable var item = item
@@ -83,6 +91,18 @@ public struct CartScreen: View {
             }
         }
         .padding()
+    }
+    
+    private var emptyView: some View {
+        ContentUnavailableView {
+            Label("You don't have any item in the cart", systemImage: "tray.fill")
+        } actions: {
+            Button {
+                router.selection = .product
+            } label: {
+                Text("Go shopping")
+            }
+        }
     }
     
     // ===============
