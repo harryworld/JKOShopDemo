@@ -55,6 +55,7 @@ public struct CartScreen: View {
                     ItemRow(item: item.item)
                 }
                 .padding(.horizontal, 4)
+                .contentShape(.containerRelative)
                 .onTapGesture {
                     item.isChecked.toggle()
                 }
