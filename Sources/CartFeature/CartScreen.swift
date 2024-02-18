@@ -55,6 +55,20 @@ public struct CartScreen: View {
                     ItemRow(item: item.item)
                 }
                 .padding(.horizontal, 4)
+                .swipeActions(edge: .trailing) {
+                    Button {
+                        withAnimation {
+                            cartModel.items.removeAll(where: { $0.id == item.id })
+                        }
+                    } label: {
+                        Label {
+                            Text("Remove")
+                        } icon: {
+                            Image(systemName: "trash")
+                        }
+                    }
+                    .tint(.red)
+                }
             }
         }
         .navigationTitle("Cart")
@@ -119,5 +133,5 @@ public struct CartScreen: View {
         CartScreen()
     }
     .environment(RouterService())
-    .environment(CartModel())
+    .environment(CartModel(items: [.mock]))
 }
