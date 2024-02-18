@@ -32,7 +32,7 @@ public struct CartConfirmScreen: View {
     
     public var body: some View {
         List {
-            ForEach(cartModel.items) { item in
+            ForEach(cartModel.selectedItems) { item in
                 @Bindable var item = item
                 HStack(spacing: 8) {
                     ItemRow(item: item.item)
