@@ -55,6 +55,9 @@ public struct CartScreen: View {
                     ItemRow(item: item.item)
                 }
                 .padding(.horizontal, 4)
+                .onTapGesture {
+                    item.isChecked.toggle()
+                }
                 .swipeActions(edge: .trailing) {
                     Button {
                         withAnimation {
