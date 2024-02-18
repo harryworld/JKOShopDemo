@@ -11,6 +11,16 @@
         }
       }
     },
+    "Go shopping" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始選購"
+          }
+        }
+      }
+    },
     "Order Detail" : {
       "localizations" : {
         "zh-Hant" : {
@@ -37,6 +47,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "訂單金額: $%.0f"
+          }
+        }
+      }
+    },
+    "You don't have any order yet" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "沒有任何訂單"
           }
         }
       }

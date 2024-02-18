@@ -11,14 +11,27 @@ import Observation
 
 @Observable
 final class ProductModel {
+    
+    // ==================
+    // MARK: - Properties
+    // ==================
+    
     var items: [Item]
     var isDataLoading = false
     private var currentPage = 1
     private let itemsPerPage = 10 // Adjust based on the backend data
     
+    // ============
+    // MARK: - Init
+    // ============
+    
     init() {
         items = Array(Item.all().prefix(upTo: 10))
     }
+    
+    // ===============
+    // MARK: - Helpers
+    // ===============
     
     func fetchNextPage() {
         guard items.count < Item.all().count else { return }

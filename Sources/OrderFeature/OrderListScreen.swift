@@ -18,6 +18,8 @@ public struct OrderListScreen: View {
     
     @Environment(RouterService.self) private var router
     
+    @State private var model = OrderModel()
+    
     // ============
     // MARK: - Init
     // ============
@@ -29,11 +31,23 @@ public struct OrderListScreen: View {
     // ============
     
     public var body: some View {
+        Group {
+            if model.orders.isEmpty {
+                emptyView
+            } else {
+                listView
+            }
+        }
+        .onAppear(perform: model.updateOrders)
+    }
+    
+    @ViewBuilder
+    private var listView: some View {
         @Bindable var router = router
         
         NavigationStack(path: $router.orderRoutes) {
             List {
-                ForEach(Order.all()) { order in
+                ForEach(model.orders) { order in
                     NavigationLink(value: OrderRoute.orderDetail(order)) {
                         OrderRow(order: order)
                     }
@@ -46,6 +60,26 @@ public struct OrderListScreen: View {
                     OrderDetailScreen(order: order)
                 }
             }
+        }
+    }
+    
+    private var emptyView: some View {
+        NavigationStack {
+            ContentUnavailableView {
+                Label {
+                    Text("You don't have any order yet", bundle: Bundle.module)
+                } icon: {
+                    Image(systemName: "tray.fill")
+                }
+            } actions: {
+                Button {
+                    router.productRoutes = []
+                    router.selection = .product
+                } label: {
+                    Text("Go shopping", bundle: Bundle.module)
+                }
+            }
+            .navigationTitle(Text("Orders", bundle: Bundle.module))
         }
     }
 }

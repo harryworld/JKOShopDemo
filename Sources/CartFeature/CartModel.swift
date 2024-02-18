@@ -25,6 +25,15 @@ public final class CartModel {
             UserDefaults.standard.set(newValue, forKey: "cartItemIDs")
         }
     }
+    private var orders: [String: [String]] {
+        get {
+            guard let orders = UserDefaults.standard.object(forKey: "orders") as? [String: [String]] else { return [:] }
+            return orders
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "orders")
+        }
+    }
     
     var items: [CartItem] {
         didSet {
@@ -84,8 +93,12 @@ public final class CartModel {
     }
     
     public func submitOrder() {
-        // TODO: Add to order list
-        items.removeAll()
+        // Add to order list
+        orders[UUID().uuidString] = selectedItems.map(\.id)
+        
+        // Clear cart
+        let selectedIDs = selectedItems.map(\.item.id)
+        items.removeAll(where: { selectedIDs.contains($0.id) })
     }
 }
 
