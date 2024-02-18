@@ -121,6 +121,18 @@ public extension Item {
         Item(id: "gloves", name: "GIANT ELEVATE", description: "長指手套", price: 980, imageUrl: "body/gloves", createdAt: Date())
         
         Item(id: "glasses", name: "APUS NXT", description: "無框太陽眼鏡-全天候變色鏡片", price: 2980, imageUrl: "body/glasses", createdAt: Date())
+        
+        Item(id: "rain", name: "SUPERLIGHT", description: "超輕防風外套", price: 2680, imageUrl: "body/rain", createdAt: Date() - 2.days)
+        
+        Item(id: "shoes", name: "SURGE COMP MES", description: "尼龍車鞋", price: 3800, imageUrl: "body/shoes", createdAt: Date() - 2.days)
+        
+        Item(id: "socks", name: "ELEVATE SOCKS", description: "", price: 480, imageUrl: "body/socks", createdAt: Date() - 2.days)
+        
+        Item(id: "hat", name: "Hat", description: "多功能透氣帽", price: 580, imageUrl: "body/hat", createdAt: Date() - 3.days)
+        
+        Item(id: "training", name: "CYCLOTRON FLUID ST", description: "油阻式訓練台(鐵)", price: 8800, imageUrl: "others/training", createdAt: Date())
+        
+        Item(id: "mat", name: "SARIS", description: "訓練地墊", price: 2600, imageUrl: "others/mat", createdAt: Date() - 2.months)
     }
     
     static let mock = Item(for: "propel")!
