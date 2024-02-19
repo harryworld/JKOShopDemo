@@ -28,6 +28,14 @@ public class DatabaseService {
             Logger.database.info("sqlite: \(databaseURL.path)")
             #endif
             
+            config.prepareDatabase { db in
+            #if DEBUG
+                db.trace {
+                    Logger.database.debug("\($0)")
+                }
+            #endif
+            }
+            
             // Create a DatabasePool
             let pool = try DatabasePool(path: databaseURL.path, configuration: config)
             return pool
@@ -46,6 +54,12 @@ public class DatabaseService {
             
             for item in Item.all() {
                 try item.save(db)
+            }
+            for order in Order.all() {
+                try order.save(db)
+                
+                let lineItem = OrderLineItem(itemId: "bag", orderId: order.id)
+                try lineItem.save(db)
             }
         }
     }
@@ -74,6 +88,15 @@ extension DatabaseWriter {
                     t.column("price", .numeric).notNull().defaults(to: 0)
                     t.column("createdAt", .datetime).notNull().defaults(to: Date())
                 })
+            }
+            
+            migrator.registerMigration("20240219 - OrderLineItem") { db in
+                try db.create(table: "orderLineItem") { t in
+                    t.primaryKey(["id"])
+                    t.column("id", .text).notNull()
+                    t.column("itemId", .text).references("item").notNull().indexed()
+                    t.column("orderId", .text).references("order").notNull().indexed()
+                }
             }
             
             return migrator

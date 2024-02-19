@@ -38,7 +38,8 @@ public struct OrderListScreen: View {
                 listView
             }
         }
-        .onAppear(perform: model.updateOrders)
+        .onAppear(perform: model.fetchList)
+        .onDisappear(perform: model.resetPage)
     }
     
     @ViewBuilder
@@ -47,17 +48,34 @@ public struct OrderListScreen: View {
         
         NavigationStack(path: $router.orderRoutes) {
             List {
-                ForEach(model.orders) { order in
-                    NavigationLink(value: OrderRoute.orderDetail(order)) {
-                        OrderRow(order: order)
+                ForEach(model.orders) { info in
+                    NavigationLink(value: OrderRoute.orderDetail(info)) {
+                        OrderRow(info: info)
+                    }
+                    .onAppear {
+                        // Demonstrate Paging
+                        if info == model.orders.last {
+                            Task {
+                                await model.fetchNextPage()
+                            }
+                        }
                     }
                 }
             }
             .navigationTitle(Text("Orders", bundle: Bundle.module))
             .navigationDestination(for: OrderRoute.self) { route in
                 switch route {
-                case .orderDetail(let order):
-                    OrderDetailScreen(order: order)
+                case .orderDetail(let info):
+                    OrderDetailScreen(info: info)
+                }
+            }
+            
+            // Show Loading
+            if model.isDataLoading {
+                HStack {
+                    Spacer()
+                    Text("Loading", bundle: Bundle.module)
+                    Spacer()
                 }
             }
         }

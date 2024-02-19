@@ -16,7 +16,7 @@ struct OrderDetailScreen: View {
     // MARK: - Properties
     // ==================
     
-    var order: Order
+    var info: OrderInfo
     
     // ============
     // MARK: - Body
@@ -24,7 +24,7 @@ struct OrderDetailScreen: View {
     
     var body: some View {
         List {
-            ForEach(order.items) { item in
+            ForEach(info.items) { item in
                 HStack(spacing: 8) {
                     ItemRow(item: item)
                 }
@@ -32,10 +32,10 @@ struct OrderDetailScreen: View {
             }
             
             HStack {
-                Text("\(order.items.count) items", bundle: Bundle.module)
+                Text("\(info.items.count) items", bundle: Bundle.module)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text("Total: $\(order.totalPrice, specifier: "%.0f")", bundle: Bundle.module)
+                Text("Total: $\(info.order.price, specifier: "%.0f")", bundle: Bundle.module)
                     .lineLimit(1)
             }
         }
@@ -45,6 +45,6 @@ struct OrderDetailScreen: View {
 
 #Preview {
     NavigationStack {
-        OrderDetailScreen(order: .mock)
+        OrderDetailScreen(info: .mock)
     }
 }

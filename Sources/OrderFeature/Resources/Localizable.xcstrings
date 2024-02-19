@@ -21,6 +21,16 @@
         }
       }
     },
+    "Loading" : {
+      "localizations" : {
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "讀取中"
+          }
+        }
+      }
+    },
     "Order Detail" : {
       "localizations" : {
         "zh-Hant" : {

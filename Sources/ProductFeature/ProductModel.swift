@@ -35,6 +35,8 @@ final class ProductModel {
     // ===============
     
     func fetchList() async {
+        guard items.isEmpty else { return }
+        
         do {
             self.items = try await fetchPage()
         } catch {

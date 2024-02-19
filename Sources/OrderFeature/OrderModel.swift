@@ -8,6 +8,7 @@
 import Foundation
 import Models
 import Observation
+import os.log
 
 @Observable
 final class OrderModel {
@@ -16,8 +17,11 @@ final class OrderModel {
     // MARK: - Properties
     // ==================
     
-    var orders: [Order]
-    
+    var orders: [OrderInfo]
+    var isDataLoading = false
+    private var currentPage = 1
+    private let itemsPerPage = 10 // Adjust based on the backend data
+
     // ============
     // MARK: - Init
     // ============
@@ -26,19 +30,54 @@ final class OrderModel {
         orders = []
     }
     
-    func updateOrders() {
-        if let dict = UserDefaults.standard.dictionary(forKey: "orders") as? [String: [String]] {
-            let products = Item.all()
-            orders = dict.map { key, ids in
-                let items = ids.compactMap { id in
-                    if let product = products.first(where: { $0.id == id }) {
-                        return product
-                    } else {
-                        return nil
-                    }
-                }
-                return Order(id: key, items: items, createdAt: Date())
+    // ===============
+    // MARK: - Helpers
+    // ===============
+    
+    func fetchList() {
+        Task {
+            do {
+                self.orders = try await fetchPage()
+            } catch {
+                Logger.database.error("\(error)")
             }
         }
+    }
+    
+    func resetPage() {
+        self.currentPage = 1
+    }
+    
+    func fetchNextPage() async {
+        do {
+            let count = try await DatabaseService.db.read { db in
+                try Order.fetchCount(db)
+            }
+            
+            guard orders.count < count else { return }
+            guard !isDataLoading else { return }
+            isDataLoading = true
+            
+            // Simulate network request
+            try await Task.sleep(for: .seconds(1))
+            
+            self.currentPage += 1
+            let newOrders = try await fetchPage()
+            self.orders.append(contentsOf: newOrders)
+            self.isDataLoading = false
+        } catch {
+            Logger.database.error("\(error)")
+        }
+    }
+    
+    private func fetchPage() async throws -> [OrderInfo] {
+        let offset = (self.currentPage - 1) * self.itemsPerPage
+        let limit = self.itemsPerPage
+        let orders = try await DatabaseService.db.read { db in
+            try OrderInfo.all()
+                .limit(limit, offset: offset)
+                .fetchAll(db)
+        }
+        return orders
     }
 }

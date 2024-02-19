@@ -30,16 +30,6 @@ public final class CartModel {
             
         }
     }
-    private var orders: [String: [String]] {
-        get {
-            guard let orders = UserDefaults.standard.object(forKey: "orders") as? [String: [String]] else { return [:] }
-            return orders
-        }
-        set {
-            defaults.set(newValue, forKey: "orders")
-            defaults.synchronize()
-        }
-    }
     
     var items: [CartItem] {
         didSet {
@@ -104,7 +94,22 @@ public final class CartModel {
     
     public func submitOrder() {
         // Add to order list
-        orders[UUID().uuidString] = selectedItems.map(\.id)
+        let ids = selectedItems.map(\.item.id)
+        let price = selectedItems.map(\.item.price).reduce(0, +)
+        Task {
+            do {
+                try await DatabaseService.db.write { db in
+                    let order = Order(price: price)
+                    let lineItems = ids.map { OrderLineItem(itemId: $0, orderId: order.id)}
+                    try order.save(db)
+                    for item in lineItems {
+                        try item.save(db)
+                    }
+                }
+            } catch {
+                Logger.database.error("\(error)")
+            }
+        }
         
         // Clear cart
         let selectedIDs = selectedItems.map(\.item.id)

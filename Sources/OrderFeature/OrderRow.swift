@@ -16,14 +16,14 @@ public struct OrderRow: View {
     // MARK: - Properties
     // ==================
     
-    let order: Order
+    let info: OrderInfo
     
     // ============
     // MARK: - Init
     // ============
     
-    public init(order: Order) {
-        self.order = order
+    public init(info: OrderInfo) {
+        self.info = info
     }
     
     // ============
@@ -34,7 +34,7 @@ public struct OrderRow: View {
         VStack {
             HStack(alignment: .top) {
                 let imageClipShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
-                Image.getSafeImage(named: order.coverImageUrl)
+                Image.getSafeImage(named: info.coverImageUrl)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 60, height: 60)
@@ -42,9 +42,9 @@ public struct OrderRow: View {
                     .overlay(imageClipShape.strokeBorder(.quaternary, lineWidth: 0.5))
                 
                 VStack(alignment: .leading) {
-                    Text(order.name)
+                    Text(info.name)
                         .font(.headline)
-                    Text(order.description)
+                    Text(info.description)
                         .lineLimit(1)
                         .foregroundStyle(.secondary)
                 }
@@ -56,10 +56,10 @@ public struct OrderRow: View {
             Divider()
             
             HStack {
-                Text("\(order.items.count) items", bundle: Bundle.module)
+                Text("\(info.items.count) items", bundle: Bundle.module)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text("Total: $\(order.totalPrice, specifier: "%.0f")", bundle: Bundle.module)
+                Text("Total: $\(info.order.price, specifier: "%.0f")", bundle: Bundle.module)
                     .lineLimit(1)
             }
         }
@@ -67,6 +67,6 @@ public struct OrderRow: View {
 }
 
 #Preview {
-    OrderRow(order: .mock)
+    OrderRow(info: .mock)
         .padding(.horizontal)
 }
