@@ -28,13 +28,13 @@ public class DatabaseService {
             Logger.database.info("sqlite: \(databaseURL.path)")
             #endif
             
-            config.prepareDatabase { db in
-            #if DEBUG
-                db.trace {
-                    Logger.database.debug("\($0)")
-                }
-            #endif
-            }
+//            config.prepareDatabase { db in
+//            #if DEBUG
+//                db.trace {
+//                    Logger.database.debug("\($0)")
+//                }
+//            #endif
+//            }
             
             // Create a DatabasePool
             let pool = try DatabasePool(path: databaseURL.path, configuration: config)
