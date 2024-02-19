@@ -8,6 +8,7 @@
 import Foundation
 import Models
 import Observation
+import os.log
 
 @Observable
 final class ProductModel {
@@ -25,28 +26,50 @@ final class ProductModel {
     // MARK: - Init
     // ============
     
-    init() {
-        items = Array(Item.all().prefix(upTo: 10))
+    init(items: [Item] = []) {
+        self.items = items
     }
     
     // ===============
     // MARK: - Helpers
     // ===============
     
-    func fetchNextPage() {
-        guard items.count < Item.all().count else { return }
-        guard !isDataLoading else { return }
-        isDataLoading = true
-        
-        // Simulate network request
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let start = self.currentPage * self.itemsPerPage
-            let offset = self.currentPage * self.itemsPerPage + self.itemsPerPage
-            let end = min(offset, Item.all().count)
-            let newItems = Array(Item.all()[start..<end])
-            self.items.append(contentsOf: newItems)
-            self.currentPage += 1
-            self.isDataLoading = false
+    func fetchList() async {
+        do {
+            self.items = try await fetchPage()
+        } catch {
+            Logger.database.error("\(error)")
         }
+    }
+    
+    func fetchNextPage() async {
+        do {
+            let count = try await DatabaseService.db.read { db in
+                try Item.fetchCount(db)
+            }
+            
+            guard items.count < count else { return }
+            guard !isDataLoading else { return }
+            isDataLoading = true
+            
+            // Simulate network request
+            try await Task.sleep(for: .seconds(1))
+            
+            self.currentPage += 1
+            let newItems = try await fetchPage()
+            self.items.append(contentsOf: newItems)
+            self.isDataLoading = false
+        } catch {
+            Logger.database.error("\(error)")
+        }
+    }
+    
+    private func fetchPage() async throws -> [Item] {
+        let offset = (self.currentPage - 1) * self.itemsPerPage
+        let limit = self.itemsPerPage
+        let items = try await DatabaseService.db.read { db in
+            try Item.limit(limit, offset: offset).fetchAll(db)
+        }
+        return items
     }
 }

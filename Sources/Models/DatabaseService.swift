@@ -10,13 +10,11 @@ import GRDB
 import os.log
 
 public class DatabaseService {
-    public static let shared = DatabaseService()
-    
-    var db: DatabasePool!
+    public private(set) static var db: DatabasePool = setupDatabase()
 
     private init() {} // Private initialization to ensure singleton
 
-    func setupDatabase() {
+    static func setupDatabase() -> DatabasePool {
         do {
             // Define the path for the database file
             let databaseURL = try FileManager.default
@@ -31,17 +29,25 @@ public class DatabaseService {
             #endif
             
             // Create a DatabasePool
-            db = try DatabasePool(path: databaseURL.path, configuration: config)
-            
-            // Perform database setup or migrations here
+            let pool = try DatabasePool(path: databaseURL.path, configuration: config)
+            return pool
         } catch {
             fatalError("Failed to initialize database: \(error)")
         }
     }
     
-    public func migrate() throws {
-        setupDatabase()
+    public static func migrate() throws {
         try db.migrate()
+    }
+    
+    public static func prepare() async throws {
+        try await db.write { db in
+            guard try Item.fetchCount(db) == 0 else { return }
+            
+            for item in Item.all() {
+                try item.save(db)
+            }
+        }
     }
 }
 

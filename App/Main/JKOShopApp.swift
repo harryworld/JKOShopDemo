@@ -21,9 +21,17 @@ struct JKOShopApp: App {
     
     init() {
         do {
-            try DatabaseService.shared.migrate()
+            try DatabaseService.migrate()
         } catch {
             Logger.database.error("\(error)")
+        }
+        
+        Task {
+            do {
+                try await DatabaseService.prepare()
+            } catch {
+                Logger.database.error("\(error)")
+            }
         }
     }
     

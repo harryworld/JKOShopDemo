@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import GRDB
 import SwiftDate
 
-public struct Item: Hashable, Identifiable {
+public struct Item: Codable, Equatable, Hashable, Identifiable {
     public let id: String
     public var name: String
     public var description: String
@@ -30,6 +31,17 @@ public struct Item: Hashable, Identifiable {
         self.price = price
         self.imageUrl = imageUrl
         self.createdAt = createdAt
+    }
+}
+
+extension Item: TableRecord, FetchableRecord, PersistableRecord {
+    enum Columns: String, ColumnExpression {
+        case id
+        case name
+        case description
+        case price
+        case imageUrl
+        case createdAt
     }
 }
 
