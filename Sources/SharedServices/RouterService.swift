@@ -37,5 +37,5 @@ public enum ProductRoute: Hashable {
 }
 
 public enum OrderRoute: Hashable {
-    case orderDetail(Order)
+    case orderDetail(OrderInfo)
 }

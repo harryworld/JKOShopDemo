@@ -44,7 +44,9 @@ public struct ProductListScreen: View {
                     .onAppear {
                         // Demonstrate Paging
                         if item == model.items.last {
-                            model.fetchNextPage()
+                            Task {
+                                await model.fetchNextPage()
+                            }
                         }
                     }
                 }
@@ -57,6 +59,9 @@ public struct ProductListScreen: View {
                         Spacer()
                     }
                 }
+            }
+            .task {
+                await model.fetchList()
             }
             .navigationTitle(Text("Products", bundle: Bundle.module))
             .navigationDestination(for: ProductRoute.self) { route in
