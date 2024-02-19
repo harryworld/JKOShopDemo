@@ -8,6 +8,7 @@
 import Foundation
 import Models
 import Observation
+import os.log
 
 @Observable
 public final class CartModel {
@@ -16,13 +17,17 @@ public final class CartModel {
     // MARK: - Properties
     // ==================
     
+    let defaults = UserDefaults.standard
+    
     private var cartItemIDs: [String] {
         get {
-            guard let ids = UserDefaults.standard.object(forKey: "cartItemIDs") as? [String] else { return [] }
+            guard let ids = defaults.object(forKey: "cartItemIDs") as? [String] else { return [] }
             return ids
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "cartItemIDs")
+            defaults.set(newValue, forKey: "cartItemIDs")
+            defaults.synchronize()
+            
         }
     }
     private var orders: [String: [String]] {
@@ -31,7 +36,8 @@ public final class CartModel {
             return orders
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "orders")
+            defaults.set(newValue, forKey: "orders")
+            defaults.synchronize()
         }
     }
     
@@ -54,28 +60,32 @@ public final class CartModel {
     // MARK: - Init
     // ============
     
-    public init() {
-        if let ids = UserDefaults.standard.object(forKey: "cartItemIDs") as? [String] {
-            let products = Item.all()
-            items = ids.compactMap { id in
-                if let product = products.first(where: { $0.id == id }) {
-                    return CartItem(isChecked: false, item: product)
-                } else {
-                    return nil
-                }
-            }
-        } else {
-            items = []
-        }
-    }
-    
-    public init(items: [Item]) {
+    public init(items: [Item] = []) {
         self.items = items.map { CartItem(isChecked: false, item: $0) }
+        
+        Task {
+            await fetchList()
+        }
     }
     
     // ===============
     // MARK: - Helpers
     // ===============
+    
+    func fetchList() async {
+        guard items.isEmpty,
+              let ids = UserDefaults.standard.object(forKey: "cartItemIDs") as? [String]
+        else { return }
+        
+        do {
+            let items = try await DatabaseService.db.read { db in
+                try Item.fetchAll(db, keys: ids)
+            }
+            self.items = items.map { CartItem(isChecked: false, item: $0) }
+        } catch {
+            Logger.database.error("\(error)")
+        }
+    }
     
     func selectAll() {
         items.forEach { $0.isChecked = true }

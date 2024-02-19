@@ -75,6 +75,9 @@ public struct CartScreen: View {
                 }
             }
         }
+        .task {
+            await cartModel.fetchList()
+        }
         .navigationTitle(Text("Cart", bundle: Bundle.module))
         .safeAreaInset(edge: .bottom) {
             bottomBar
