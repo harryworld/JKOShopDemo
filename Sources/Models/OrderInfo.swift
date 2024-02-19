@@ -38,5 +38,5 @@ public extension OrderInfo {
         items.first!.description
     }
     
-    static let mock = OrderInfo(order: .init(price: 10), items: [])
+    static let mock = OrderInfo(order: .init(price: 600000), items: [.propel, .tcr])
 }

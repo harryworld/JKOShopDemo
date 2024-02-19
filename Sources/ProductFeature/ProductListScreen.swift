@@ -20,13 +20,15 @@ public struct ProductListScreen: View {
     
     @Environment(RouterService.self) private var router
     
-    @State private var model = ProductModel()
+    @State private var model: ProductModel
     
     // ============
     // MARK: - Init
     // ============
     
-    public init() {}
+    public init(items: [Item] = []) {
+        self._model = State(wrappedValue: ProductModel(items: items))
+    }
     
     // ============
     // MARK: - Body
@@ -80,7 +82,7 @@ public struct ProductListScreen: View {
 }
 
 #Preview {
-    ProductListScreen()
+    ProductListScreen(items: Item.all())
         .environment(RouterService())
         .environment(CartModel())
 }

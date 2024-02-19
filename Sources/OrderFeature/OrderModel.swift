@@ -26,8 +26,8 @@ final class OrderModel {
     // MARK: - Init
     // ============
     
-    init() {
-        orders = []
+    init(orders: [OrderInfo] = []) {
+        self.orders = orders
     }
     
     // ===============

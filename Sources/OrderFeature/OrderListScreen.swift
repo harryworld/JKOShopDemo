@@ -18,13 +18,15 @@ public struct OrderListScreen: View {
     
     @Environment(RouterService.self) private var router
     
-    @State private var model = OrderModel()
+    @State private var model: OrderModel
     
     // ============
     // MARK: - Init
     // ============
     
-    public init() {}
+    public init(orders: [OrderInfo] = []) {
+        self._model = State(wrappedValue: OrderModel(orders: orders))
+    }
     
     // ============
     // MARK: - Body
@@ -103,6 +105,6 @@ public struct OrderListScreen: View {
 }
 
 #Preview {
-    OrderListScreen()
+    OrderListScreen(orders: [.mock])
         .environment(RouterService())
 }

@@ -75,6 +75,6 @@ public struct CartConfirmScreen: View {
         CartConfirmScreen()
     }
     .environment(RouterService())
-    .environment(CartModel())
+    .environment(CartModel(cartItems: [CartItem(isChecked: true, item: .mock)]))
 }
 

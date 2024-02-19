@@ -58,6 +58,10 @@ public final class CartModel {
         }
     }
     
+    init(cartItems: [CartItem]) {
+        self.items = cartItems
+    }
+    
     // ===============
     // MARK: - Helpers
     // ===============
