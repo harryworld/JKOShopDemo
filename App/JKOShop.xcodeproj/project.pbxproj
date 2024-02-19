@@ -19,6 +19,7 @@
 		067F66332B7A490900A3BEAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		067F66362B7A490900A3BEAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		067F663D2B7A497200A3BEAA /* JKOShop */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JKOShop; path = ..; sourceTree = "<group>"; };
+		06C54FDD2B831C210095438A /* JKOShop-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "JKOShop-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +37,7 @@
 		067F66232B7A490800A3BEAA = {
 			isa = PBXGroup;
 			children = (
+				06C54FDD2B831C210095438A /* JKOShop-Info.plist */,
 				067F663D2B7A497200A3BEAA /* JKOShop */,
 				067F662E2B7A490800A3BEAA /* Main */,
 				067F662D2B7A490800A3BEAA /* Products */,
@@ -287,6 +289,7 @@
 				DEVELOPMENT_TEAM = 3S3EQ7P95S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JKOShop-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,6 +319,7 @@
 				DEVELOPMENT_TEAM = 3S3EQ7P95S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "JKOShop-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
